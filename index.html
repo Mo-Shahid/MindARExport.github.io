@@ -1,0 +1,195 @@
+<!doctype html>
+<html>
+  <head>
+  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <script src="../../../dist/mindar-face.prod.js"></script>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="../../../dist/mindar-face-aframe.prod.js"></script>
+    <link rel="shortcut icon" href="#">
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+
+        
+		const sceneEl = document.querySelector('a-scene');
+		
+
+	    const saudiHair = document.querySelector("#saudiHair");       
+        const saudiGlass = document.querySelector("#saudiGlass");
+        const saudiRiyadh = document.querySelector("#saudiRiyadh");
+        const saudiHelmet = document.querySelector("#saudiHelmet");
+        const saudiCartoonFace = document.querySelector("#saudiCartoonFace");
+	
+
+        sceneEl.addEventListener("targetFound", event => {
+            //console.log("target found");
+
+			//videow.width ='3840px'
+			//videow.height='2160px'
+			
+		sceneEl.style='top: 840px;left: -840px;width: 3840px;height: 2160px;'
+		videow = document.getElementsByTagName("video")[0];
+		videow.style ='position: absolute; top: 840px; left: -840px; z-index: -2; width: 3840px; height: 2160px;'
+        });
+
+        sceneEl.addEventListener("targetLost", event => {
+            //console.log("target lost");
+            let randItem = Math.floor(Math.random() * 5);
+            switch(randItem)
+            {
+              case 0:
+                saudiHair.setAttribute("visible", "true");
+                saudiGlass.setAttribute("visible", "false");
+                saudiRiyadh.setAttribute("visible", "false");
+                saudiHelmet.setAttribute("visible", "false");
+                saudiCartoonFace.setAttribute("visible", "false");
+                
+                break;
+              case 1:
+                saudiHair.setAttribute("visible", "false");
+                saudiGlass.setAttribute("visible", "true");
+                saudiRiyadh.setAttribute("visible", "false");
+                saudiHelmet.setAttribute("visible", "false");
+                saudiCartoonFace.setAttribute("visible", "false");
+				
+                break;
+			case 2:
+                saudiHair.setAttribute("visible", "false");
+                saudiGlass.setAttribute("visible", "false");
+                saudiRiyadh.setAttribute("visible", "true");
+                saudiHelmet.setAttribute("visible", "false");
+                saudiCartoonFace.setAttribute("visible", "false");
+				console.log("2");
+                break;
+			case 3:
+                saudiHair.setAttribute("visible", "false");
+                saudiGlass.setAttribute("visible", "false");
+                saudiRiyadh.setAttribute("visible", "false");
+                saudiHelmet.setAttribute("visible", "true");
+                saudiCartoonFace.setAttribute("visible", "false");
+				console.log("3");
+                break;
+			case 4:
+                saudiHair.setAttribute("visible", "false");
+                saudiGlass.setAttribute("visible", "false");
+                saudiRiyadh.setAttribute("visible", "false");
+                saudiHelmet.setAttribute("visible", "false");
+                saudiCartoonFace.setAttribute("visible", "true");
+				console.log("4");
+                break;
+              
+              default:
+                break;
+            }
+        });
+      });
+    </script>
+
+
+  <style>
+ div {
+  height: 3840px;
+  width: 2160px; 
+	}
+	
+.innercontainer {
+  width: 3840px%;
+  height: 2160px%;
+  transform: rotateY(180deg);
+  transform-style: preserve-3d;
+  transition: all 1.0s linear;
+  }
+    body {
+      margin: 0;
+    }
+    .ar-container {
+      overflow: hidden;
+      position: absolute;
+      width:3840px%;
+      height:2160px%;
+      -webkit-transform: scaleX(-1);
+	 
+      transform: scaleX(-1);
+	  //transform: scaleZ(-1);
+    }
+    img
+	{
+      display:block;
+      width:2160px;
+      height:3840px%;
+      object-fit: cover;
+      position: absolute;
+    }
+	.overlay {
+  position:absolute;
+  top:0;
+  width:100%;
+  z-index:25;
+  text-align:bottom;
+}
+	.rotated {
+  transform: rotate(270deg); /* Equal to rotateZ(45deg) */
+  
+}
+  </style>
+
+  </head>
+  <body>
+    <div class="ar-container">
+	<div class="overlay">
+    <img src="./overlayMirrored.png" alt="test">
+  </div>
+     
+		
+    <div class="rotated">	
+      <a-scene mindar-face embedded color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+	  <a-entity mindar-face-target="anchorIndex: 168">
+          <a-gltf-model mindar-face-occluder position="0 -0.3 0.15" rotation="0 0 0" scale="0.08 0.08 0.08" src="#headModel"></a-gltf-model>
+        </a-entity>
+        
+        <a-assets>          
+          <a-asset-item id="headModel" src="./headOccluder.glb"></a-asset-item>
+          
+		  <a-asset-item id="ssaudiHair" src="./SaudiHair.glb"></a-asset-item>
+          <a-asset-item id="ssaudiGlass" src="./saudiGlass.glb"></a-asset-item>
+          <a-asset-item id="ssaudiRiyadh" src="./SaudiRiyadh.glb"></a-asset-item>
+          <a-asset-item id="ssaudiHelmet" src="./SaudiHelmet.glb"></a-asset-item>
+          <a-asset-item id="ssaudiCartoonFace" src="./mangaFilter.glb"></a-asset-item>
+        </a-assets>
+        
+		
+        <a-camera active="false" position="0 0 0"></a-camera>
+		
+
+        
+	
+		<a-entity mindar-face-target="anchorIndex: 1">
+          <a-gltf-model id="saudiHair" rotation="0 0 0" position="0 0 0" scale="-7 7 7" src="#ssaudiHair" visible="true"></a-gltf-model>
+        </a-entity>
+
+        
+        <a-entity mindar-face-target="anchorIndex: 1">
+          <a-gltf-model id="saudiGlass" rotation="0 0 0" position="0 -.1 0" scale="-10 10 10" src="#ssaudiGlass" visible="false"></a-gltf-model>
+        </a-entity>
+		
+		<a-entity mindar-face-target="anchorIndex: 1">
+          <a-gltf-model id="saudiRiyadh" rotation="0 0 0" position="0 0 0" scale="-8 8 8" src="#ssaudiRiyadh" visible="false"></a-gltf-model>
+        </a-entity>
+		
+		<a-entity mindar-face-target="anchorIndex: 1">
+          <a-gltf-model id="saudiHelmet" rotation="0 0 0" position=".01 -.05 -.08" scale="-8.2 8.2 8.2" src="#ssaudiHelmet" visible="false"></a-gltf-model>
+        </a-entity>
+		
+		<a-entity mindar-face-target="anchorIndex: 1">
+          <a-gltf-model id="saudiCartoonFace" rotation="0 0 0" position="0 .1 0" scale="-6.5 6.5 6.5" src="#ssaudiCartoonFace" visible="false"></a-gltf-model>
+        </a-entity>
+
+       
+
+      </a-scene>
+    </div>
+	</div>
+  </body>
+</html>
